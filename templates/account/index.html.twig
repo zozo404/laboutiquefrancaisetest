@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La boutique française{% endblock %}
+
+{% block content %}
+<h1>
+Bienvenue {{(app.user.firstname)}}.
+</h1>
+<p>
+Dans cet espace vous êtes le goat.
+</p>
+<hr>
+- <a href="{{path('app_account_password')}}">Modifier mon mot de passe</a><br>
+-ajouter adresses<br>
+-mes commandes<br>
+<hr>
+{% endblock %}

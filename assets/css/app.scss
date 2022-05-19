@@ -1,0 +1,20 @@
+@import "~bootstrap/scss/bootstrap";
+@import "../css/carousel.scss";
+
+// CSS ||||||||||||||||||||||||||||||||||||||
+
+// navbar ||||
+.navbar-item-custom a{
+    color: white;
+    text-decoration: none;
+}
+
+// footer ||||
+.footer-custom{
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #dfeaff;
+    padding-top: 25px;
+}
