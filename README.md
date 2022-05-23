@@ -10,8 +10,17 @@ Site e-commerce avec panel de connexion/user/admin/produit/categories/panier
 ---
 ## ⚠️ Etapes pour lancer le projet symfony ⚠️
 
-Le projet pourra uniquement marcher après ces manipulations!
-
+Le projet pourra uniquement marcher après ces manipulations❗️
+---
+-  📥 Le récupérer sur votre machine grâce aux commandes git (avec Laragon en exemple)📥:
+```bash
+    cd C:\laragon\www\
+```
+- Puis
+```bash
+    git clone https://github.com/zozo404/laboutiquefrancaisetest.git
+```
+---
 - Configurer le fichier .env pour notre mysql local, ajouter cette ligne :
 
 ```bash
@@ -98,6 +107,10 @@ Le projet pourra uniquement marcher après ces manipulations!
 ```bash
   symfony console doctrine:migrations:migrate
 ```
+❗️ NB: Si la migration affiche un message d'erreur, essayer ces solutions:
+- 🥇  Effacer les anciennes migrations car Symfony les envoies toutes en mêmes temps (conflits) puis, réessayer.
+Sinon:
+- 🥈  Effacer l'ancienne base de données (attention aux pertes de données) et refaites les commandes.
 ---
 ## Authors
 
