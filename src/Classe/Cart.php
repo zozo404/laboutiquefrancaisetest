@@ -1,14 +1,16 @@
 <?php
 namespace App\Classe;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class Cart{
 
     private $session;
-    public function __construct(SessionInterface $session)
-    {
-        $this->session = $session;
+
+    public function __construct(RequestStack $requestStack){
+        $this->session = $requestStack->getSession();
+    
     }
+
     public function add($id){
         $cart = $this->session->get('cart',[]);
         if(!empty($cart[$id])){
