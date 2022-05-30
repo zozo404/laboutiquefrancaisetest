@@ -5,40 +5,59 @@
 {% block content %}
     <h1>Mon panier</h1>
     Retrouvez l'assemble des produis hauts de gammes qui ont été ajouté à votre panier.
-    <hr>
-    <table class="table mt-3">
-        <thead>
-            <tr>
-            <th scope="col">Images</th>
-            <th scope="col">Produits</th>
-            <th scope="col">Quantité</th>
-            <th scope="col">Prix</th>
-            <th scope="col">Total</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% set total = null %}
-        {% for product in cart %}
-            <tr>
-                <th>
-                <img height="75px" src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}"><br>
-                </th>
-                <td>
-                {{ product.product.name }}<br>
-                <small>{{ product.product.subtitle }}</small>
-                </td>
-                <td>x {{ product.quantity }}</td>
-                <td>{{(product.product.price / 100)|number_format(2, ',',' ')}}</td>
-                <td>{{ ((product.product.price * product.quantity) / 100)|number_format(2, ',',' ') }}
-                </td>
-            </tr>
-            {% set total = total + (product.product.price * product.quantity) %}
-        {% endfor %}    
-        </tbody>
-    </table>
-    <div class="text-end mb-5">
-        <b>Nombre de produit:</b> {{ cart |length }} <br>
-        <b>Total de mon panier:</b> {{ ((total) / 100)|number_format(2, ',',' ') }} <br>
-        <a href="" class="btn btn-success">Valider mon panier</a>
-    </div>
+    {% if cart|length > 0 %}
+    
+        <hr>
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                <th scope="col">Images</th>
+                <th scope="col">Produits</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% set total = null %}
+            {% for product in cart %}
+                <tr>
+                    <th>
+                    <img height="75px" src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}"><br>
+                    </th>
+                    <td>
+                    {{ product.product.name }}<br>
+                    <small>{{ product.product.subtitle }}</small>
+                    </td>
+                    <td>
+                        <a href="{{ path('decrease_to_cart', {'id':product.product.id}) }}" style="text-decoration:none;">
+                            <img src="{{ asset('/img/moins.png') }}" height="12px" alt="Diminuer quantité">
+                        </a>    
+                        x {{ product.quantity }}
+                        <a href="{{ path('add_to_cart', {'id':product.product.id}) }}">
+                            <img src="{{ asset('/img/plus.png') }}" height="12px" alt="Augmenter quantité">
+                        </a>    
+                    </td>
+                    <td>{{(product.product.price / 100)|number_format(2, ',',' ')}}</td>
+                    <td>{{ ((product.product.price * product.quantity) / 100)|number_format(2, ',',' ') }}
+                    </td>
+                    <td>
+                    <a href="{{ path('delete_to_cart', {'id':product.product.id}) }}">
+                        <img src="{{ asset('/img/poubelle.png') }}" height="18px" alt="Supprimer mon produit">
+                    </a>
+                    </td>
+                </tr>
+                {% set total = total + (product.product.price * product.quantity) %}
+            {% endfor %}    
+            </tbody>
+        </table>
+        <div class="text-end mb-5">
+            <b>Nombre de produit:</b> {{ cart |length }} <br>
+            <b>Total de mon panier:</b> {{ ((total) / 100)|number_format(2, ',',' ') }} <br>
+            <a href="" class="btn btn-success mt-3">Valider mon panier</a>
+        </div>
+    {% else %}
+        <hr>
+        <b>Votre panier est vide.</b>
+    {% endif %}
 {% endblock %}
