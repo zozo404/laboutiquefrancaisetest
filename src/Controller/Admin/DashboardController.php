@@ -12,6 +12,7 @@ use App\Entity\Category;
 use App\Entity\Product;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use App\Controller\Admin\UserCrudController;
+use App\Entity\Carrier;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -41,6 +42,7 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Users', 'fa fa-user', User::class),
             MenuItem::linkToCrud('Categories', 'fa fa-list', Category::class),
             MenuItem::linkToCrud('Products', 'fa fa-tag', Product::class),
+            MenuItem::linkToCrud('Carriers', 'fa fa-truck', Carrier::class),
         ];
 
         // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
