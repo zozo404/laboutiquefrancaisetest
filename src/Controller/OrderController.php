@@ -23,7 +23,7 @@ class OrderController extends AbstractController
     }
 
 
-    #[Route('/commande', name: 'app_order')]
+    #[Route('/commande', name: 'app_order', methods: 'GET')]//corriger le bug du post
     public function index(Cart $cart, Request $request): Response
     {
         if(!$this->getUser()->getAddresses()->getValues()){
@@ -91,10 +91,14 @@ class OrderController extends AbstractController
             }
 
             // $this->entityManager->flush();
+            return $this->render('order/add.html.twig',[
+                'cart' => $cart->getFull(),
+                'carrier' => $carriers,
+                'delivery' => $delivery_content
+            ]);
         }
+        return $this->redirectToRoute('app_cart');
 
-        return $this->render('order/add.html.twig',[
-            'cart' => $cart->getFull()
-        ]);
+        
     }
 }

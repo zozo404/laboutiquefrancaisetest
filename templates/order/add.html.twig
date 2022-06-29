@@ -8,15 +8,26 @@
     <hr>
     <div class="row">
         <div class="col-md-6">
-            Mon adresse de livraison <br>
-            Mon transporteur    
+            <strong>Mon adresse de livraison</strong><br>
+            <div class="form-check mt-4">
+                {{ delivery|raw }}<br>
+            </div>
+
+            <hr>
+            <div class="form-check">
+                <strong>Mon transporteur</strong><br>
+                {{carrier.name}}<br>
+                {{carrier.description}}<br>
+                {{carrier.price|number_format(2, ',',' ') }} €<br>
+            </div>
+            
         </div>
         <div class="col-md-6">
         <div class="text-center">
-            <b>Récap de ma commande</b>
-            <p>Ici le récaputilatif de vos produits</p>
+            <b>Ma commande</b>
         </div>
             <div class="order-summary">
+                {% set total = null %}
                 {% for key,product in cart %}
                 <div class="row {% if key > 0 %}mt-2{% endif %}">
                     <div class="col-3">
@@ -34,14 +45,15 @@
                         {{ ((product.product.price * product.quantity) / 100)|number_format(2, ',',' ') }}€
                     </div>
                 </div>
+                {% set total = total + (product.product.price * product.quantity) %}
                 {% endfor %}
 
             </div>
             <hr>
-            <strong>Sous-total: </strong><br>
-            <strong>Livraison: </strong><br>
-            <strong>Total: </strong>
-            <a href="" class="btn btn-success mt-3 w-100">Payer</a>
+            <strong>Sous-total: </strong>{{ ((total) / 100)|number_format(2, ',',' ') }} €<br>
+            <strong>Livraison: </strong>{{ (carrier.price)|number_format(2, ',',' ') }} €<br>
+            <strong>Total: </strong>{{ ((total / 100) + carrier.price)|number_format(2, ',',' ') }} €
+            <a href="" class="btn btn-success mt-3 w-100">Payer | {{ ((total / 100) + carrier.price)|number_format(2, ',',' ') }} €</a>
             <br>
         </div>
     </div>

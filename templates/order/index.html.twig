@@ -18,15 +18,14 @@
         <div class="col-md-6">
         <div class="text-center">
             <b>Récap de ma commande</b>
-            <p>Ici le récaputilatif de vos produits</p>
         </div>
             <div class="order-summary">
                 {% for key,product in cart %}
                 <div class="row {% if key > 0 %}mt-2{% endif %}">
-                    <div class="col-2">
+                    <div class="col-3">
                     <img height="75px" src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}">
                     </div>
-                    <div class="col-8 my-auto">
+                    <div class="col-7 my-auto">
                         {{ product.product.name }}<br>
                         <small>{{ product.product.subtitle }}</small>
                     </div>
